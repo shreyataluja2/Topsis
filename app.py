@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from topsis_angad import run_topsis
+from topsis_shreya.core import run_topsis
 import os
 import tempfile
 
@@ -13,16 +13,13 @@ st.markdown("---")
 # Sidebar for inputs
 with st.sidebar:
     st.header("⚙️ Configuration")
-    
+
     uploaded_file = st.file_uploader("Upload CSV File", type=['csv'])
-    
     weights_input = st.text_input("Weights (comma-separated)", placeholder="2.3,1.7,3.1,0.9,2.6")
-    
     impacts_input = st.text_input("Impacts (comma-separated)", placeholder="+,-,+,-,+")
-    
     calculate_btn = st.button("🚀 Calculate TOPSIS", type="primary")
 
-# Main content area
+# Main layout
 col1, col2 = st.columns(2)
 
 with col1:
@@ -30,7 +27,7 @@ with col1:
     if uploaded_file is not None:
         try:
             df_input = pd.read_csv(uploaded_file)
-            st.dataframe(df_input, width='stretch')
+            st.dataframe(df_input, use_container_width=True)
         except Exception as e:
             st.error(f"Error reading file: {e}")
     else:
@@ -38,7 +35,7 @@ with col1:
 
 with col2:
     st.subheader("📤 TOPSIS Results")
-    
+
     if calculate_btn:
         if uploaded_file is None:
             st.error("Please upload a CSV file")
@@ -48,41 +45,33 @@ with col2:
             st.error("Please enter impacts")
         else:
             try:
-                # Create temporary files
-                with tempfile.NamedTemporaryFile(delete=False, suffix='.csv', mode='wb') as tmp_input:
+                with tempfile.NamedTemporaryFile(delete=False, suffix=".csv") as tmp_input:
                     tmp_input.write(uploaded_file.getvalue())
                     input_path = tmp_input.name
-                
-                with tempfile.NamedTemporaryFile(delete=False, suffix='.csv') as tmp_output:
+
+                with tempfile.NamedTemporaryFile(delete=False, suffix=".csv") as tmp_output:
                     output_path = tmp_output.name
-                
-                # Run TOPSIS
+
                 run_topsis(input_path, weights_input, impacts_input, output_path)
-                
-                # Read and display results
+
                 df_result = pd.read_csv(output_path)
-                st.dataframe(df_result, width='stretch')
-                
-                # Download button
-                csv = df_result.to_csv(index=False)
+                st.dataframe(df_result, use_container_width=True)
+
                 st.download_button(
-                    label="⬇️ Download Results",
-                    data=csv,
-                    file_name="topsis_results.csv",
-                    mime="text/csv"
+                    "⬇️ Download Results",
+                    df_result.to_csv(index=False),
+                    "topsis_results.csv",
+                    "text/csv"
                 )
-                
-                # Success message
+
                 st.success("✅ TOPSIS calculation completed successfully!")
-                
-                # Clean up temp files
+
                 os.unlink(input_path)
                 os.unlink(output_path)
-                
+
             except Exception as e:
                 st.error(f"Error: {e}")
 
-# Footer
 st.markdown("---")
-st.markdown("**Author:** Angad Singh Madhok (102313005)")
-st.markdown("[GitHub Repository](https://github.com/angad2803/TOPSIS-Data-Science)")
+st.markdown("**Author:** Shreya Taluja")
+st.markdown("[GitHub Repository](https://github.com/shreyataluja2/Topsis)")
