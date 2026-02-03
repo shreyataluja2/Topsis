@@ -1,6 +1,6 @@
-# Topsis-ANGAD-102313005
+# Topsis-SHREYA-102313020
 
-**TOPSIS** (Technique for Order Preference by Similarity to Ideal Solution) by **ANGAD SINGH MADHOK** (Roll 102313005)
+**TOPSIS** (Technique for Order Preference by Similarity to Ideal Solution) by **SHREYA** (Roll No 102313020)
 
 ---
 
@@ -63,7 +63,8 @@ This project provides both a **command-line tool** and a **web interface** for p
 
 ## 4. Live Link
 
-**🚀 Live Demo:** [https://topsis-data-science-bghplnmn7wfrzxw8hbepcc.streamlit.app/](https://topsis-data-science-bghplnmn7wfrzxw8hbepcc.streamlit.app/)
+**🚀 Live Demo:**   
+<https://shreya26.streamlit.app/>
 
 ---
 
@@ -75,7 +76,7 @@ This project provides both a **command-line tool** and a **web interface** for p
 
 ## 📦 Repository
 
-<https://github.com/angad2803/TOPSIS-Data-Science>
+<https://github.com/shreyataluja2/Topsis.git>
 
 ---
 
@@ -109,4 +110,4 @@ MIT License
 
 ## 👤 Author
 
-ANGAD SINGH MADHOK - Roll No. 102313005
+SHREYA - Roll No. 102313020
